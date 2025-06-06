@@ -1,4 +1,6 @@
 use std::io;
+use rand::Rng;
+
 
 fn opening(){
     println!("\n
@@ -8,8 +10,10 @@ fn opening(){
 }
 
 fn main() {
+    let secret = rand::thread_rng().gen_range(1..=100);
+
     opening();
-    println!("Input your guess!");
+    println!("Input your guess!(1-100)");
     let mut guess = String::new();
     io::stdin()
         .read_line(&mut guess)
@@ -19,8 +23,10 @@ fn main() {
         .trim()
         .parse()
         .expect("This is not a Number");
-    let num2: isize = (guess*-2).try_into().unwrap();
+    let num2: isize = (guess).try_into().unwrap();
     println!("The final Answer: {}",num2);
+    println!("The Correct Answer is : {}",secret);
+    println!("You are {}!", secret==num2);
     
 
 
