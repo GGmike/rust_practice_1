@@ -1,6 +1,13 @@
 use rand::Rng;
 use std::io;
 
+
+#[derive(Debug)]
+struct Todo {
+    title: String,
+    description: String,
+    completed: bool,}
+
 fn opening() {
     println!(
         "\n
