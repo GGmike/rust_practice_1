@@ -11,23 +11,44 @@ fn opening(){
 
 fn main() {
     let secret = rand::thread_rng().gen_range(1..=100);
-
+    let mut maxValue: isize = 100;
+    let mut minValue: isize = 1;
     opening();
-    println!("Input your guess!(1-100)");
+    loop{
+    println!("Guess The number {} - {}", minValue, maxValue);
     let mut guess = String::new();
     io::stdin()
         .read_line(&mut guess)
-        .expect("Failed to read line");
-    println!("You guess: {}",guess);
+        .unwrap();
+    
+//    println!("You guess: {}",guess);
     let guess: isize = guess
         .trim()
         .parse()
         .expect("This is not a Number");
-    let num2: isize = (guess).try_into().unwrap();
-    println!("The final Answer: {}",num2);
-    println!("The Correct Answer is : {}",secret);
-    println!("You are {}!", secret==num2);
+     
+    if guess<minValue || guess>maxValue {
+        println!("Out of bound");
+        continue;
+    }
+
+    //let num2: isize = (guess).try_into().unwrap();
+  //  println!("The final Answer: {}",secret);
+    if guess>secret {
+        maxValue = guess;
+    //    println!
+    } 
+    else if guess<secret {
+        minValue = guess;
     
 
-
+    }
+    else{
+    println!("Correct!");
+    break;
+    }
+    }
+//    println!("The Correct Answer is : {}",secret);
+//    println!("You are {}!", secret==num2);
+    
 }
