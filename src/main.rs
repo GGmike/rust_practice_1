@@ -27,6 +27,28 @@ fn opening() {
     );
 }
 
+fn ToDoList(){
+    let mut todo_list: Vec<Todo> = Vec::new();
+    loop{
+        println!(" TO DO LIST 
+        \n  1. Add a new task
+        \n  2. View tasks
+        \n  3. Mark task as completed
+        \n  4. Remove a task
+        \n  0. Back to main menu");
+        let mut choice = String::new();
+        io::stdin()
+            .read_line(&mut choice)
+            .expect("Failed to read line");
+        let choice: isize = choice.trim().parse().expect("This is not a Number");
+
+        match choice{
+            
+        }
+
+    }
+}
+
 fn Guessing() {
     let mut maxValue: isize = 100;
     let mut minValue: isize = 1;
