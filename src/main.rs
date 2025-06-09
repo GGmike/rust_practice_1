@@ -8,6 +8,7 @@ struct Todo {
     description: String,
     completed: bool,}
 
+
 fn opening() {
     println!(
         "\n
@@ -27,10 +28,35 @@ fn opening() {
 }
 
 fn Guessing() {
-    let secret = rand::thread_rng().gen_range(1..=100);
     let mut maxValue: isize = 100;
     let mut minValue: isize = 1;
+    let mut temp: isize = 0;
     let mut attempt: i32 = 0;
+    let mut miVal = String::new();
+    let mut maVal = String::new();
+    println!("Welcome to the Guessing Game!");
+    println!("Please enter the minimum value (default is 1):");
+    io::stdin().read_line(&mut miVal).expect("Read Line failed");
+    if !miVal.trim().is_empty() {
+        minValue = miVal.trim().parse().expect("This is not a Number");
+    }
+    println!("Please enter the maximum value (default is 100):");
+    io::stdin().read_line(&mut maVal).expect("Read Line failed");
+    if !maVal.trim().is_empty() {
+        maxValue = maVal.trim().parse().expect("This is not a Number");
+    }
+    if minValue >= maxValue {
+        println!("Invalid range. Minimum value {} must be less than maximum value {}.", minValue, maxValue);
+        println!("Swapping values to correct the range.");
+        temp = minValue;
+        minValue = maxValue;
+        maxValue = temp;
+        println!("Range adjusted to: {} - {}", minValue, maxValue);
+
+    }
+
+    let secret = rand::thread_rng().gen_range(minValue..=maxValue);
+
     loop {
         println!("Guess The number {} - {}", minValue, maxValue);
         let mut guess = String::new();
@@ -73,24 +99,24 @@ fn Guessing() {
     }
 }
 
-
-
 fn main() {
-    loop{
-    opening();
-    let mut menu_num = String::new();
-    io::stdin()
-        .read_line(&mut menu_num)
-        .expect("Read Line failed");
-    let menu_num: isize = menu_num.trim().parse().expect("This is not a Number");
-    println!("You entered {}", menu_num);
-    match menu_num {
-        0 => break,
-        1 => Guessing(),
-        2 => println!("To Do List"),
-        3 => println!("Calculator"),
-        _ =>{ println!("Invalid Option");
-        break;},
-    }
+    loop {
+        opening();
+        let mut menu_num = String::new();
+        io::stdin()
+            .read_line(&mut menu_num)
+            .expect("Read Line failed");
+        let menu_num: isize = menu_num.trim().parse().expect("This is not a Number");
+        println!("You entered {}", menu_num);
+        match menu_num {
+            0 => break,
+            1 => Guessing(),
+            2 => println!("To Do List"),
+            3 => println!("Calculator"),
+            _ => {
+                println!("Invalid Option");
+                break;
+            }
+        }
     }
 }
